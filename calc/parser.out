@@ -1,0 +1,283 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> term
+Rule 2     expression -> expression ADD term
+Rule 3     expression -> expression SUB term
+Rule 4     term -> primary_expression
+Rule 5     term -> term MUL primary_expression
+Rule 6     term -> term DIV primary_expression
+Rule 7     primary_expression -> DOUBLE_LITERAL
+Rule 8     primary_expression -> LP expression RP
+Rule 9     primary_expression -> SUB primary_expression
+
+Terminals, with rules where they appear
+
+ADD                  : 2
+DIV                  : 6
+DOUBLE_LITERAL       : 7
+LP                   : 8
+MUL                  : 5
+RP                   : 8
+SUB                  : 3 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 2 3 8 0
+primary_expression   : 4 5 6 9
+term                 : 1 2 3 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . term
+    (2) expression -> . expression ADD term
+    (3) expression -> . expression SUB term
+    (4) term -> . primary_expression
+    (5) term -> . term MUL primary_expression
+    (6) term -> . term DIV primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    expression                     shift and go to state 1
+    term                           shift and go to state 2
+    primary_expression             shift and go to state 4
+
+state 1
+
+    (0) S' -> expression .
+    (2) expression -> expression . ADD term
+    (3) expression -> expression . SUB term
+
+    ADD             shift and go to state 7
+    SUB             shift and go to state 8
+
+
+state 2
+
+    (1) expression -> term .
+    (5) term -> term . MUL primary_expression
+    (6) term -> term . DIV primary_expression
+
+    ADD             reduce using rule 1 (expression -> term .)
+    SUB             reduce using rule 1 (expression -> term .)
+    $end            reduce using rule 1 (expression -> term .)
+    RP              reduce using rule 1 (expression -> term .)
+    MUL             shift and go to state 9
+    DIV             shift and go to state 10
+
+
+state 3
+
+    (9) primary_expression -> SUB . primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    primary_expression             shift and go to state 11
+
+state 4
+
+    (4) term -> primary_expression .
+
+    MUL             reduce using rule 4 (term -> primary_expression .)
+    DIV             reduce using rule 4 (term -> primary_expression .)
+    ADD             reduce using rule 4 (term -> primary_expression .)
+    SUB             reduce using rule 4 (term -> primary_expression .)
+    $end            reduce using rule 4 (term -> primary_expression .)
+    RP              reduce using rule 4 (term -> primary_expression .)
+
+
+state 5
+
+    (7) primary_expression -> DOUBLE_LITERAL .
+
+    MUL             reduce using rule 7 (primary_expression -> DOUBLE_LITERAL .)
+    DIV             reduce using rule 7 (primary_expression -> DOUBLE_LITERAL .)
+    ADD             reduce using rule 7 (primary_expression -> DOUBLE_LITERAL .)
+    SUB             reduce using rule 7 (primary_expression -> DOUBLE_LITERAL .)
+    $end            reduce using rule 7 (primary_expression -> DOUBLE_LITERAL .)
+    RP              reduce using rule 7 (primary_expression -> DOUBLE_LITERAL .)
+
+
+state 6
+
+    (8) primary_expression -> LP . expression RP
+    (1) expression -> . term
+    (2) expression -> . expression ADD term
+    (3) expression -> . expression SUB term
+    (4) term -> . primary_expression
+    (5) term -> . term MUL primary_expression
+    (6) term -> . term DIV primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    expression                     shift and go to state 12
+    term                           shift and go to state 2
+    primary_expression             shift and go to state 4
+
+state 7
+
+    (2) expression -> expression ADD . term
+    (4) term -> . primary_expression
+    (5) term -> . term MUL primary_expression
+    (6) term -> . term DIV primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    term                           shift and go to state 13
+    primary_expression             shift and go to state 4
+
+state 8
+
+    (3) expression -> expression SUB . term
+    (4) term -> . primary_expression
+    (5) term -> . term MUL primary_expression
+    (6) term -> . term DIV primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    term                           shift and go to state 14
+    primary_expression             shift and go to state 4
+
+state 9
+
+    (5) term -> term MUL . primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    primary_expression             shift and go to state 15
+
+state 10
+
+    (6) term -> term DIV . primary_expression
+    (7) primary_expression -> . DOUBLE_LITERAL
+    (8) primary_expression -> . LP expression RP
+    (9) primary_expression -> . SUB primary_expression
+
+    DOUBLE_LITERAL  shift and go to state 5
+    LP              shift and go to state 6
+    SUB             shift and go to state 3
+
+    primary_expression             shift and go to state 16
+
+state 11
+
+    (9) primary_expression -> SUB primary_expression .
+
+    MUL             reduce using rule 9 (primary_expression -> SUB primary_expression .)
+    DIV             reduce using rule 9 (primary_expression -> SUB primary_expression .)
+    ADD             reduce using rule 9 (primary_expression -> SUB primary_expression .)
+    SUB             reduce using rule 9 (primary_expression -> SUB primary_expression .)
+    $end            reduce using rule 9 (primary_expression -> SUB primary_expression .)
+    RP              reduce using rule 9 (primary_expression -> SUB primary_expression .)
+
+
+state 12
+
+    (8) primary_expression -> LP expression . RP
+    (2) expression -> expression . ADD term
+    (3) expression -> expression . SUB term
+
+    RP              shift and go to state 17
+    ADD             shift and go to state 7
+    SUB             shift and go to state 8
+
+
+state 13
+
+    (2) expression -> expression ADD term .
+    (5) term -> term . MUL primary_expression
+    (6) term -> term . DIV primary_expression
+
+    ADD             reduce using rule 2 (expression -> expression ADD term .)
+    SUB             reduce using rule 2 (expression -> expression ADD term .)
+    $end            reduce using rule 2 (expression -> expression ADD term .)
+    RP              reduce using rule 2 (expression -> expression ADD term .)
+    MUL             shift and go to state 9
+    DIV             shift and go to state 10
+
+
+state 14
+
+    (3) expression -> expression SUB term .
+    (5) term -> term . MUL primary_expression
+    (6) term -> term . DIV primary_expression
+
+    ADD             reduce using rule 3 (expression -> expression SUB term .)
+    SUB             reduce using rule 3 (expression -> expression SUB term .)
+    $end            reduce using rule 3 (expression -> expression SUB term .)
+    RP              reduce using rule 3 (expression -> expression SUB term .)
+    MUL             shift and go to state 9
+    DIV             shift and go to state 10
+
+
+state 15
+
+    (5) term -> term MUL primary_expression .
+
+    MUL             reduce using rule 5 (term -> term MUL primary_expression .)
+    DIV             reduce using rule 5 (term -> term MUL primary_expression .)
+    ADD             reduce using rule 5 (term -> term MUL primary_expression .)
+    SUB             reduce using rule 5 (term -> term MUL primary_expression .)
+    $end            reduce using rule 5 (term -> term MUL primary_expression .)
+    RP              reduce using rule 5 (term -> term MUL primary_expression .)
+
+
+state 16
+
+    (6) term -> term DIV primary_expression .
+
+    MUL             reduce using rule 6 (term -> term DIV primary_expression .)
+    DIV             reduce using rule 6 (term -> term DIV primary_expression .)
+    ADD             reduce using rule 6 (term -> term DIV primary_expression .)
+    SUB             reduce using rule 6 (term -> term DIV primary_expression .)
+    $end            reduce using rule 6 (term -> term DIV primary_expression .)
+    RP              reduce using rule 6 (term -> term DIV primary_expression .)
+
+
+state 17
+
+    (8) primary_expression -> LP expression RP .
+
+    MUL             reduce using rule 8 (primary_expression -> LP expression RP .)
+    DIV             reduce using rule 8 (primary_expression -> LP expression RP .)
+    ADD             reduce using rule 8 (primary_expression -> LP expression RP .)
+    SUB             reduce using rule 8 (primary_expression -> LP expression RP .)
+    $end            reduce using rule 8 (primary_expression -> LP expression RP .)
+    RP              reduce using rule 8 (primary_expression -> LP expression RP .)
+
