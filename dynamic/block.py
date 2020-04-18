@@ -1,6 +1,5 @@
 from statements import Statements
 
-
 class Block:
 
     def __init__(self):
