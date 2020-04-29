@@ -2,17 +2,43 @@ import ply.lex as lex
 from ply.lex import LexToken
 
 
-
 tokens = [
-    'NOUN',   # 名词
-    'VERB',   # 动词
-    'END',  # 结束符
-] 
+    'STRING', 
+    'ASSIGN_CONTENT',      # 定义需求
+    'RE_ASSIGN',           # 指定需求
+    'ASSIGN_DEVELOP',      # 指定开发
+    'DEFINE_REQ',          # 定义需求
+    'END',                 # 结束符
+    'SHOW_REQ',            # 看需求详情
+]
 
-
-t_NOUN = "(黄彬|需求)"
-t_VERB = "(改|删|变|提)"
 t_END = "[。.]"
+
+def t_DEFINE_REQ(t: LexToken):
+    r"(我有个需求(叫做)?)|(我又要提个需求(叫做)?)"
+    return t
+
+def t_RE_ASSIGN(t: LexToken):
+    r"让我们回到需求"
+    return t
+
+def t_SHOW_REQ(t: LexToken):
+    r"让我看看需求"
+    return t
+
+def t_ASSIGN_CONTENT(t: LexToken):
+    r"内容(改)?为"
+    return t
+
+def t_ASSIGN_DEVELOP(t: LexToken):
+    r'开发我选'
+    return t 
+
+
+def t_STRING(t: LexToken):
+    r'\w+'
+    return t
+
 
 t_ignore = ' \t'
 def t_newline(t: LexToken):
@@ -34,7 +60,7 @@ def main():
     lexer = lex.lex()
 
     data = """
-    黄彬改需求
+    物流重构内容为啥也不做。
     """
     lexer.input(data)
     while True:
